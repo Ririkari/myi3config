@@ -2,7 +2,7 @@
 # It will not be overwritten, so edit it as you like.
 #
 # Should you change your keyboard layout some time, delete
-# this file and re-run i3-config-wizard(1).
+# this fileee and re-run i3-config-wizard(1).
 #
 
 # i3 config file (v4)
@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango: Noto Sans 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -35,7 +35,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
+set $refreesh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
@@ -45,14 +45,13 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
-#i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+Tab exec --no-startup-id rofi -show drun
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -151,12 +150,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-#key binding
-bindsym $mod+F1 exec google-chrome-stable
-bindsym $mod+F2 exec telegram-desktop
-bindsym $mod+F3 exec spotify --no-zygote
+bindsym $mod+Shift+e exec "pkill i3"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -173,8 +168,8 @@ mode "resize" {
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
@@ -189,15 +184,28 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-	position top
+        position top
+        colors {
+                active_workspace #bf048a #bf048a #ffffff
+                inactive_workspace #bf048a #bf048a #ffffff
+                focused_workspace #fbaed2 #fbaed2 #ffffff
+        }
 }
 
-#colors
-client.focused_inactive #000000 #474343 #ffffff #48009B #000000
-client.focused #8F3EAC #8F3EAC #ffffff #8F3EAC #000000 
+client.focused #bf048a #bf048a #bf048a #bf048a #bf048a
+default_border pixel
 
-#sturtup
-exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id xrandr --output VGA-0 --left-of LVDS --primary
+gaps outer 5
+gaps inner 20
 
-exec --no-startup-id feh --bg-fill /home/tony/Pictures/wallpapers/taktopdestiny.png
+exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/1123926.jpg &!
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id flameshot
+exec --no-startup-id conky --config= ~/.config/conky/conky.conf
+
+bindsym Mod1+s exec --no-startup-id flameshot gui &!
+
+bindsym $mod+F1 exec chromium
+bindsym $mod+F2 exec telegram-desktop
+bindsym $mod+F3 exec spotify --no-zygote
+bindsym $mod+F4 exec thunar
