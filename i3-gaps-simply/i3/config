@@ -8,7 +8,6 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -45,7 +44,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -150,7 +149,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "pkill i3"
+bindsym $mod+Shift+e exec "pkill Xorg"
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
@@ -197,8 +196,7 @@ default_border pixel
 
 gaps outer 5
 gaps inner 20
-
-exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/1123926.jpg &!
+exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/1123926.jpg
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id flameshot
 exec --no-startup-id conky --config= ~/.config/conky/conky.conf
@@ -206,6 +204,9 @@ exec --no-startup-id conky --config= ~/.config/conky/conky.conf
 bindsym Mod1+s exec --no-startup-id flameshot gui &!
 
 bindsym $mod+F1 exec chromium
+bindsym $mod+Shift+F1 exec firefox
 bindsym $mod+F2 exec telegram-desktop
+bindsym $mod+Shift+F2 exec discord
 bindsym $mod+F3 exec spotify --no-zygote
-bindsym $mod+F4 exec thunar
+bindsym $mod+F4 exec kitty -e ranger
+bindsym $mod+Shift+F4 exec thunar
