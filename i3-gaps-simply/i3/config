@@ -191,17 +191,29 @@ bar {
         }
 }
 
+
+
+#COLORS
+
 client.focused #bf048a #bf048a #bf048a #bf048a #bf048a
 default_border pixel
 
+
+#CUSTOM SETTINGS
+
 gaps outer 5
 gaps inner 20
-exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/1123926.jpg
+exec --no-startup-id xautolock -time 10 -locker i3lock-fancy
+#exec --no-startup-id feh --bg-fill 
+exec --no-startup-id wal -i ~/Pictures/wallpapers/Linux-anime-lesbians-Debian-1924067.jpg
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id flameshot
 exec --no-startup-id conky --config= ~/.config/conky/conky.conf
 
+bindsym $mod+Shift+a exec i3lock-fancy
+bindsym $mod+Shift+d exec --no-startup-id fish -c '. ~/.config/i3/xautolock.fish'
 bindsym Mod1+s exec --no-startup-id flameshot gui &!
+
 
 bindsym $mod+F1 exec chromium
 bindsym $mod+Shift+F1 exec firefox
